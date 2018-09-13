@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const houseCard = () => {
-  return <div className="house-card" />;
-};
+export class HouseCard extends Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.haus.name}</h1>
+        <p>{this.props.haus.seats}</p>
+        <p>{this.props.haus.founded}</p>
+      </div>
+    );
+  }
+}
 
-export default houseCard;
+const mapStateToProps = state => ({
+  haus: state.addInitialInfo
+});
+
+export default connect(mapStateToProps)(HouseCard);

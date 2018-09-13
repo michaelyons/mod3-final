@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
 import wolf from './wolf.gif';
 import { connect } from 'react-redux';
-import houseCard from '../HouseCard/houseCard';
-import { addInitialInfo } from '../../actions/initialFetchActions';
-import { initialFetch } from '../../helpers';
+import HouseCard from '../HouseCard/HouseCard';
 
-class CardContainer extends Component {
-  componentDidMount() {
-    this.populateCards();
-  }
-
-  populateCards = async () => {
-    const thronesData = await initialFetch();
-    this.props.addInitialInfo(thronesData);
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    this.populateCards();
-  };
-
+export class CardContainer extends Component {
   render() {
-    return (
-      <div handleSubmit={this.handleSubmit}>
-        <houseCard thronesData={this.thronesData} />
-      </div>
-    );
+    const house = this.props.thronesData.map(haus => {
+      return <HouseCard haus={haus} />;
+    });
+    return <div>{house}</div>;
   }
 }
 
@@ -33,11 +16,4 @@ const mapStateToProps = state => ({
   thronesData: state.thronesData
 });
 
-const mapDispatchToProps = dispatch => ({
-  addInitialInfo: info => dispatch(addInitialInfo(info))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardContainer);
+export default connect(mapStateToProps)(CardContainer);

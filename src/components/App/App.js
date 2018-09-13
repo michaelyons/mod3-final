@@ -2,9 +2,21 @@ import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+import { initialFetch } from '../../helpers';
+import { addInitialInfo } from '../../actions/initialFetchActions';
 import CardContainer from '../CardContainer/CardContainer';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.populateCards();
+  }
+
+  populateCards = async () => {
+    const thronesData = await initialFetch();
+    this.props.addInitialInfo(thronesData);
+  };
+
   render() {
     return (
       <div className="App">
@@ -13,7 +25,8 @@ export default class App extends Component {
           <h2>Welcome to Westeros</h2>
         </div>
         <div className="Display-info" />
-        <CardContainer />
+        {this.props.thronesData}
+        {<CardContainer thronesData={this.props.thronesData} />}
       </div>
     );
   }
@@ -22,3 +35,16 @@ export default class App extends Component {
 App.propTypes = {
   addInitialInfo: func.isRequired
 };
+
+const mapStateToProps = state => ({
+  thronesData: state.thronesData
+});
+
+const mapDispatchToProps = dispatch => ({
+  addInitialInfo: thronesData => dispatch(addInitialInfo(thronesData))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
