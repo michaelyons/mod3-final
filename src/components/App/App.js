@@ -25,8 +25,8 @@ class App extends Component {
           <h2>Welcome to Westeros</h2>
         </div>
         <div className="Display-info" />
-        {this.props.thronesData}
-        {<CardContainer thronesData={this.props.thronesData} />}
+        {<CardContainer thronesData={this.props.thronesData} /> &&
+          this.props.thronesData}
       </div>
     );
   }
