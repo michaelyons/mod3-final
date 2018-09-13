@@ -6,13 +6,26 @@ import { addInitialInfo } from '../../actions/initialFetchActions';
 import { initialFetch } from '../../helpers';
 
 class CardContainer extends Component {
-  componentDidMount = async () => {
+  componentDidMount() {
+    this.populateCards();
+  }
+
+  populateCards = async () => {
     const thronesData = await initialFetch();
     this.props.addInitialInfo(thronesData);
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    this.populateCards();
+  };
+
   render() {
-    return <div>{houseCard}</div>;
+    return (
+      <div handleSubmit={this.handleSubmit}>
+        <houseCard thronesData={this.thronesData} />
+      </div>
+    );
   }
 }
 
