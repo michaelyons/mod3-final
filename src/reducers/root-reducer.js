@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import { fake } from './fake-reducer';
+import { initialInfoReducer } from './initialInfoReducer';
 
 const rootReducer = combineReducers({
-  fake
+  initialInfo: initialInfoReducer
 });
-
 
 export default rootReducer;
