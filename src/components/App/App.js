@@ -7,8 +7,9 @@ import { addInitialInfo } from '../../actions/initialFetchActions';
 
 import { initialFetch } from '../../helpers';
 class App extends Component {
-  componentDidMount = async data => {
-    await initialFetch(data);
+  componentDidMount = async () => {
+    const thronesData = await initialFetch();
+    this.props.addInitialInfo(thronesData);
   };
 
   render() {
