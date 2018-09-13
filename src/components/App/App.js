@@ -7,9 +7,9 @@ import { initialFetch } from '../../helpers';
 import { addInitialInfo } from '../../actions/initialFetchActions';
 import CardContainer from '../CardContainer/CardContainer';
 
-class App extends Component {
-  componentDidMount() {
-    this.populateCards();
+export class App extends Component {
+  async componentDidMount() {
+    await this.populateCards();
   }
 
   populateCards = async () => {
@@ -18,15 +18,15 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.props.initialInfo)
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Westeros</h2>
         </div>
+        <CardContainer initialInfo={this.props.initialInfo} />
         <div className="Display-info" />
-        {<CardContainer thronesData={this.props.thronesData} /> &&
-          this.props.thronesData}
       </div>
     );
   }
@@ -37,11 +37,11 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  thronesData: state.thronesData
+  initialInfo: state.initialInfo
 });
 
 const mapDispatchToProps = dispatch => ({
-  addInitialInfo: thronesData => dispatch(addInitialInfo(thronesData))
+  addInitialInfo: info => dispatch(addInitialInfo(info))
 });
 
 export default connect(

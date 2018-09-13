@@ -4,3 +4,4 @@ export const initialFetch = async () => {
   const info = await response.json();
   return info;
 };
+
