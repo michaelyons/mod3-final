@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import wolf from './wolf.gif';
+import { connect } from 'react-redux';
+import houseCard from '../HouseCard/houseCard';
+import { addInitialInfo } from '../../actions/initialFetchActions';
+import { initialFetch } from '../../helpers';
 
-const CardContainer = () => {
-  let houseCard;
-  if (!this.thronesData) {
-    houseCard = <img src={wolf} alt="wolf gif" />;
-  } else {
-    houseCard = this.thronesData.data.map(info => (
-      <p key={info.id}>{`${info.name}: ${info.name}`}</p>
-    ));
+class CardContainer extends Component {
+  componentDidMount = async () => {
+    const thronesData = await initialFetch();
+    this.props.addInitialInfo(thronesData);
+  };
+
+  render() {
+    return <div>{houseCard}</div>;
   }
-  return <div>{houseCard}</div>;
-};
+}
 
-export default CardContainer;
+const mapStateToProps = state => ({
+  thronesData: state.thronesData
+});
+
+const mapDispatchToProps = dispatch => ({
+  addInitialInfo: info => dispatch(addInitialInfo(info))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardContainer);
