@@ -47,7 +47,7 @@ export class HouseCard extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   addMembers: member => dispatch(addMembers(member))
 });
 

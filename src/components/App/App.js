@@ -23,8 +23,11 @@ export class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Westeros</h2>
+          <p>my fingers hurt</p>
         </div>
-        <CardContainer initialInfo={this.props.initialInfo} />
+        <div className="cardsholder">
+          <CardContainer initialInfo={this.props.initialInfo} />
+        </div>
         <div className="Display-info" />
       </div>
     );

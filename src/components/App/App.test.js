@@ -1,11 +1,9 @@
-import React from 'react';
 import {
-  App,
   mapStateToProps,
   mapDispatchToProps
 } from './App';
 import {
-  addInitialInfo, addMembers
+  addInitialInfo
 } from '../../actions/initialFetchActions';
 
 describe('App', () => {
