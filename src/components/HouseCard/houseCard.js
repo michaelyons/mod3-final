@@ -28,7 +28,7 @@ export class HouseCard extends Component {
   render() {
     const { haus } = this.props;
     const shownSwornMemebers = this.state.members.map(sworn => {
-      return <h5>{sworn.name}: {sworn.died ? sworn.died : "Not Dead"}</h5> || <h5></h5>
+      return <p>{sworn.name}: {sworn.died ? sworn.died : "Not Dead"}</p> || <p></p>
     })
     return (
       <div className='cards'

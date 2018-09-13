@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { shape, func, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
@@ -18,7 +18,6 @@ export class App extends Component {
   };
 
   render() {
-    console.log(this.props.initialInfo)
     return (
       <div className="App">
         <div className="App-header">
@@ -33,14 +32,14 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  addInitialInfo: func.isRequired
+  addInitialInfo: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   initialInfo: state.initialInfo
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   addInitialInfo: info => dispatch(addInitialInfo(info))
 });
 
