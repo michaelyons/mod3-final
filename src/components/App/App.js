@@ -3,6 +3,7 @@ import PropTypes, { shape, func, string } from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
+import CardContainer from '../CardContainer/CardContainer';
 import { addInitialInfo } from '../../actions/initialFetchActions';
 
 import { initialFetch } from '../../helpers';
@@ -20,8 +21,8 @@ class App extends Component {
           <h2>Welcome to Westeros</h2>
           <button
             onClick={() => {
-              this.props.addInitialInfo();
-              alert(this.props.addInitialInfo);
+              this.props.thronesData;
+              alert(this.props.thronesData);
             }}
           >
             {' '}
@@ -29,25 +30,25 @@ class App extends Component {
           </button>
         </div>
         <div className="Display-info" />
+        <CardContainer thronesData={this.props.thronesData} />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  fake: shape({ fake: string }),
-  fakeAction: func.isRequired
+  addInitialInfo: func.isRequired
 };
 
-// const mapStateToProps = (state) => ({
-//   state.initialInfo
-// });
+const mapStateToProps = state => ({
+  thronesData: state.thronesData
+});
 
 const mapDispatchToProps = dispatch => ({
   addInitialInfo: info => dispatch(addInitialInfo(info))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
