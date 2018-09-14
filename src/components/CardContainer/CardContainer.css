@@ -1,7 +1,6 @@
 .cardsholder {
   display: flex;
   flex-wrap: wrap;
-  background-color: mediumaquamarine;
   justify-content: center;
   width: 50%;
   margin: auto
